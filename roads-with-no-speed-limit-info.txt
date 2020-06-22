@@ -1,0 +1,14 @@
+[out:json][timeout:25];
+// gather results
+(
+  // Used the query wizard (basically lets you input a layman's version of the language and translate it into the real language) to build:
+  // Query part for: “highway=* and maxspeed!=*”
+  //  way["highway"]["maxspeed"!~".*"]({{bbox}}););
+  
+  // borrowed footway/cycleway/path syntax from https://wiki.openstreetmap.org/wiki/Overpass_API/Overpass_API_by_Example#Highway_around_schools_with_inappropriate_maxspeed_.28since_0.7.54.29 
+  // see LICENSE.osmwiki.overpass-by-example file.
+  way["highway"][highway!~"^(footway|cycleway|path)$"]["maxspeed"!~".*"]({{bbox}}););
+  // print results
+  out body;
+>;
+out skel qt;
